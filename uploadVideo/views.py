@@ -4,9 +4,8 @@ from __future__ import unicode_literals
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.core.files.storage import FileSystemStorage
 
-
-# Create your views here.
 
 @csrf_exempt
 def uploadVideo(request):
