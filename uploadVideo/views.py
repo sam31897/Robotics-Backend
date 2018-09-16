@@ -9,4 +9,5 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def uploadVideo(request):
+    # call runOpenFace
     return
