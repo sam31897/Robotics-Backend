@@ -9,6 +9,7 @@ from django.core.files.storage import FileSystemStorage
 
 @csrf_exempt
 def uploadVideo(request):
+    # call runOpenFace
     if request.method != 'POST':
         return JsonResponse({'status_code': 400, 'message': "Error, please use POST." }, status=400)
 
