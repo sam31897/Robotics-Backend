@@ -12,5 +12,11 @@ def uploadVideo(request):
     if request.method != 'POST':
         return JsonResponse({'status': 400, 'message': "Error, please use POST." }, status=400)
 
-    
-    return
+    myfile = request.FILES['myfile']
+    fs = FileSystemStorage()
+    filename = fs.save(myfile.name, myfile)
+    uploaded_file_url = fs.url(filename)
+
+    return {'status': 200,
+            'message': "Video uploaded successfully",
+            'data': {'filepath': uploaded_file_url}}
