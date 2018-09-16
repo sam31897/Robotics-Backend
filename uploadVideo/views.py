@@ -10,13 +10,13 @@ from django.core.files.storage import FileSystemStorage
 @csrf_exempt
 def uploadVideo(request):
     if request.method != 'POST':
-        return JsonResponse({'status': 400, 'message': "Error, please use POST." }, status=400)
+        return JsonResponse({'status_code': 400, 'message': "Error, please use POST." }, status=400)
 
     myfile = request.FILES['myfile']
     fs = FileSystemStorage()
     filename = fs.save(myfile.name, myfile)
     uploaded_file_url = fs.url(filename)
 
-    return {'status': 200,
+    return JsonResponse({'status_code': 200,
             'message': "Video uploaded successfully",
-            'data': {'filepath': uploaded_file_url}}
+            'data': {'filepath': uploaded_file_url}})
