@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^uploadVideo/', include('uploadVideo.urls')),
     url(r'^extractFeatures/', include('extractFeatures.urls')),
+    url(r'^visualizeData/', include('visualizeData.urls')),
 ]
