@@ -1,5 +1,5 @@
-Input:/Users/ashish/Downloads/videoplayback.mp4
-Input full path:/Users/ashish/Downloads/videoplayback.mp4
+Input:/Users/ashish/Documents/Capstone/Robotics-Backend/media/videoplayback.mp4
+Input full path:/Users/ashish/Documents/Capstone/Robotics-Backend/media/videoplayback.mp4
 Camera parameters:437.5,437.5,320,180
 Output HOG:videoplayback.hog
 Output video:videoplayback.avi
