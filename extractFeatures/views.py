@@ -4,6 +4,9 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
 import subprocess
 import os
 
@@ -25,6 +28,7 @@ def runOpenFace(request):
     for line in res.splitlines():
         print(line)
     csvFileName =  "{}.csv".format(filename[:-4])
+    request.session['csvFileName'] = csvFileName
     print(csvFileName)
     processedOpenFacePath = "{}/processed/{}".format(cwd, csvFileName)
 
