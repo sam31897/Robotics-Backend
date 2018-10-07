@@ -20,14 +20,14 @@ def runVisualization(request):
         return JsonResponse({'status_code': 400, 'message': "Error, please use GET." }, status=400)
 
     cwd = os.getcwd()
-    filename = request.GET.get('filename')
+    filename = request.GET.get('fileName')
+
 
     split = filename.split('.')
     csvFileName = split[0] + '.csv'
 
     processedOpenFacePath = "{}/processed/{}".format(cwd, csvFileName)
     df = pd.read_csv(processedOpenFacePath)
-    print(df)
     df_json = df.to_json('temp.json', orient='records', lines=True)
     pca = PCA(n_components=2)
     principalComponents = pca.fit_transform(df)
