@@ -20,8 +20,7 @@ def runVisualization(request):
         return JsonResponse({'status_code': 400, 'message': "Error, please use GET." }, status=400)
 
     cwd = os.getcwd()
-    # csvFileName = request.session["csvFileName"]
-    csvFileName = "videoplayback.csv"
+    csvFileName = request.session["csvFileName"]
     processedOpenFacePath = "{}/processed/{}".format(cwd, csvFileName)
     df = pd.read_csv(processedOpenFacePath)
     print(df)
