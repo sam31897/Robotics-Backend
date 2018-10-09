@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/danielmizrahi/Documents/openpose/CMakeFiles/openpose_caffe"
+		},
+		{
+			"file" : "/Users/danielmizrahi/Documents/openpose/CMakeFiles/openpose_caffe.rule"
+		},
+		{
+			"file" : "/Users/danielmizrahi/Documents/openpose/CMakeFiles/openpose_caffe-complete.rule"
+		},
+		{
+			"file" : "/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-install.rule"
+		},
+		{
+			"file" : "/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-mkdir.rule"
+		},
+		{
+			"file" : "/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-download.rule"
+		},
+		{
+			"file" : "/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-update.rule"
+		},
+		{
+			"file" : "/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-patch.rule"
+		},
+		{
+			"file" : "/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-configure.rule"
+		},
+		{
+			"file" : "/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"openpose_caffe"
+		],
+		"name" : "openpose_caffe"
+	}
+}

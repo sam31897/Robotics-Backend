@@ -1,0 +1,13 @@
+# Target labels
+ openpose_caffe
+# Source files and their labels
+/Users/danielmizrahi/Documents/openpose/CMakeFiles/openpose_caffe
+/Users/danielmizrahi/Documents/openpose/CMakeFiles/openpose_caffe.rule
+/Users/danielmizrahi/Documents/openpose/CMakeFiles/openpose_caffe-complete.rule
+/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-install.rule
+/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-mkdir.rule
+/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-download.rule
+/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-update.rule
+/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-patch.rule
+/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-configure.rule
+/Users/danielmizrahi/Documents/openpose/caffe/src/openpose_caffe-stamp/openpose_caffe-build.rule

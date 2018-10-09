@@ -175,3 +175,8 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# Models for openpose
+models/pose
+models/face
+models/hand
