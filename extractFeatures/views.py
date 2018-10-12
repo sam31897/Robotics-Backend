@@ -16,7 +16,8 @@ import json
 
 # Create your views here.
 
-featureExtractionPath = "/Users/ashish/Desktop/OpenFace/OpenFace/build/bin/FeatureExtraction"
+featureExtractionPath = "/Users/danielmizrahi/Documents/OpenFace/build/bin/FeatureExtraction"
+featureExtractionPathOpenPose = "./build/examples/openpose/openpose.bin"
 openFacePath = "someTempPath"
 
 def getVideoNumber(counter):
@@ -59,13 +60,14 @@ def runOpenPose(request):
         return JsonResponse({'status_code': 400, 'message': "Error, please use GET." }, status=400)
 
     cwd = os.getcwd()
-    videoPath = '{}/media/{}'.format(cwd, videoName)
+    
     #run openface on video
     videoName = request.GET.get('filename')
-    res = subprocess.check_output([featureExtractionPath, '--video', videoPath, '-write_json', 'openposeOutput'])
+    videoPath = '{}/media/{}'.format(cwd, videoName)
+    res = subprocess.check_output([featureExtractionPathOpenPose, '--video', videoPath, '-write_json', 'openposeOutput'])
     for line in res.splitlines():
         print(line)
-    processedOpenFacePath = "/Users/ashish/Desktop/processed/videoplayback.csv"
+   
 
     videoOutputs = []
 
@@ -100,6 +102,11 @@ def runOpenPose(request):
 
     df = pd.DataFrame(allExamples)
     openPoseCsv = df.to_csv()
-    response = HttpResponse(openPoseCsv, content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename={}.csv'.format(videoName)
-    return response
+    with open('{}/openPoseCSV/{}.csv'.format(cwd, videoName[:-4]), 'w') as filehandle:  
+        filehandle.write(df.to_csv())
+
+    with open('{}/openPoseCSV/{}.csv'.format(cwd, videoName[:-4]), 'rb') as myfile:
+        response = HttpResponse(myfile, content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename={}'.format(videoName)
+        return response
+    

@@ -15,7 +15,7 @@ import json
 # Create your views here.
 
 @csrf_exempt
-def runVisualization(request):
+def runVisualizationOpenFace(request):
     if request.method != 'GET':
         return JsonResponse({'status_code': 400, 'message': "Error, please use GET." }, status=400)
 
@@ -35,3 +35,67 @@ def runVisualization(request):
     principalComponentsJson = json.dumps(principalComponentsList)
     print(principalComponentsJson)    
     return JsonResponse({'status_code': 200, 'data': principalComponentsJson }, status=200) 
+
+@csrf_exempt
+def runVisualizationOpenPose(request):
+    if request.method != 'GET':
+        return JsonResponse({'status_code': 400, 'message': "Error, please use GET." }, status=400)
+
+    cwd = os.getcwd()
+    filename = request.GET.get('fileName')
+
+
+    split = filename.split('.')
+    csvFileName = split[0] + '.csv'
+
+    processedOpenFacePath = '{}/openPoseCSV/{}.csv'.format(cwd, filename[:-4])
+    df = pd.read_csv(processedOpenFacePath)
+    df_json = df.to_json('temp.json', orient='records', lines=True)
+    pca = PCA(n_components=2)
+    principalComponents = pca.fit_transform(df)
+    principalComponentsList = principalComponents.tolist()
+    principalComponentsJson = json.dumps(principalComponentsList)
+    print(principalComponentsJson)    
+    return JsonResponse({'status_code': 200, 'data': principalComponentsJson }, status=200) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
