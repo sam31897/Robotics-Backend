@@ -48,8 +48,8 @@ def runVisualizationOpenPose(request):
     split = filename.split('.')
     csvFileName = split[0] + '.csv'
 
-    processedOpenFacePath = '{}/openPoseCSV/{}.csv'.format(cwd, filename[:-4])
-    df = pd.read_csv(processedOpenFacePath)
+    processedOpenPosePath = '{}/openPoseCSV/{}.csv'.format(cwd, filename[:-4])
+    df = pd.read_csv(processedOpenPosePath)
     df_json = df.to_json('temp.json', orient='records', lines=True)
     pca = PCA(n_components=2)
     principalComponents = pca.fit_transform(df)
