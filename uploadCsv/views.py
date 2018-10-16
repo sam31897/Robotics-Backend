@@ -14,6 +14,7 @@ def uploadCSV(request):
     if request.method != 'POST':
         return JsonResponse({'status_code': 400, 'message': "Error, please use POST." }, status=400)
 
+    print("here")
     cwd = os.getcwd()
     myfile = request.FILES['myCSV']
     libraryType = request.POST.get('type')
