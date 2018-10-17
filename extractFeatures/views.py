@@ -64,9 +64,9 @@ def runOpenPose(request):
     #run openface on video
     videoName = request.GET.get('filename')
     videoPath = '{}/media/{}'.format(cwd, videoName)
-    res = subprocess.check_output([featureExtractionPathOpenPose, '--video', videoPath, '-write_json', 'openposeOutput'])
-    for line in res.splitlines():
-        print(line)
+    # res = subprocess.check_output([featureExtractionPathOpenPose, '--video', videoPath, '-write_json', 'openposeOutput'])
+    # for line in res.splitlines():
+    #     print(line)
    
 
     videoOutputs = []
@@ -101,7 +101,36 @@ def runOpenPose(request):
         allExamples.append(combinedFeatures)
 
     df = pd.DataFrame(allExamples)
+
+
+
+
+    #create timestamps
+    timestamps = []
+    fps = 24
+    for i in range(df.shape[0]):
+        timestamps.append((float(float(1)/float(fps)) * float(i)))
+
+
+
+    #create feature labels
+    featureLabels = []
+    for i in range(25):
+        for j in range(3):
+            if j == 0:
+                featureLabels.append("x{}".format(i))
+            if j == 1:
+                featureLabels.append("y{}".format(i))
+            if j == 2:
+                featureLabels.append("c{}".format(i))
+    print(featureLabels)
+    df.columns = featureLabels
+    #df.rename(index="str", columns=featureLabels)
+    
+    df.insert(loc = 0, value = timestamps, column = "time stamp")
+    df.columns.name = "frame"
     openPoseCsv = df.to_csv()
+
     with open('{}/openPoseCSV/{}.csv'.format(cwd, videoName[:-4]), 'w') as filehandle:  
         filehandle.write(df.to_csv())
 
