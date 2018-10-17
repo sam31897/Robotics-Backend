@@ -16,7 +16,7 @@ import json
 
 # Create your views here.
 
-featureExtractionPath = "/Users/danielmizrahi/Documents/OpenFace/build/bin/FeatureExtraction"
+featureExtractionPath = "/Users/Stanley/OpenFace/build/bin/FeatureExtraction"
 featureExtractionPathOpenPose = "./build/examples/openpose/openpose.bin"
 openFacePath = "someTempPath"
 
@@ -50,7 +50,7 @@ def runOpenFace(request):
         response = HttpResponse(myfile, content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename={}'.format(csvFileName)
         return response
-    
+
     return JsonResponse({'status_code': 400, 'message': "Error, openFace failed." }, status=400)
 
 @csrf_exempt
@@ -60,20 +60,20 @@ def runOpenPose(request):
         return JsonResponse({'status_code': 400, 'message': "Error, please use GET." }, status=400)
 
     cwd = os.getcwd()
-    
+
     #run openface on video
     videoName = request.GET.get('filename')
     videoPath = '{}/media/{}'.format(cwd, videoName)
     res = subprocess.check_output([featureExtractionPathOpenPose, '--video', videoPath, '-write_json', 'openposeOutput'])
     for line in res.splitlines():
         print(line)
-   
+
 
     videoOutputs = []
 
     quit = False
     counter = 0
-    
+
     #loop through all of the jsons and load them in
     while quit != True:
         #check to see if the file exists
@@ -89,7 +89,7 @@ def runOpenPose(request):
         else:
             quit = True
         counter = counter + 1
-    
+
     allExamples = []
     for myJson in videoOutputs:
         #print(myJson["people"])
@@ -102,11 +102,28 @@ def runOpenPose(request):
 
     df = pd.DataFrame(allExamples)
     openPoseCsv = df.to_csv()
-    with open('{}/openPoseCSV/{}.csv'.format(cwd, videoName[:-4]), 'w') as filehandle:  
+    with open('{}/openPoseCSV/{}.csv'.format(cwd, videoName[:-4]), 'w') as filehandle:
         filehandle.write(df.to_csv())
 
     with open('{}/openPoseCSV/{}.csv'.format(cwd, videoName[:-4]), 'rb') as myfile:
         response = HttpResponse(myfile, content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename={}'.format(videoName)
         return response
-    
+
+@csrf_exempt
+def describeData(request):
+    if request.method != 'GET':
+        return JsonResponse({'status_code': 400, 'message': "Error, please use GET." }, status=400)
+
+    filename = request.GET.get('filename', '')
+    cwd = os.getcwd()
+    csvFileName =  "{}.csv".format(filename[:-4])
+    print(csvFileName)
+    processedOpenFacePath = "{}/processed/{}".format(cwd, csvFileName)
+    df = pd.read_csv(processedOpenFacePath)
+    description = df.frame.describe()
+    print(description)
+    descriptionJson = description.to_json()
+    # print(descriptionJson)
+
+    return JsonResponse({'status_code': 200, 'pandaDescription': descriptionJson}, status=200)
